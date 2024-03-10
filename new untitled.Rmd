@@ -1,0 +1,368 @@
+---
+title: "Pareto family of Extended Weibull distribution coding"
+author: "OTUNUGA OLUWASEUN"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+In this analysis, the codes for the Pareto family of Extended Weibull distribution by Otunuga, Oluwaseun Elizabeth, ("The Pareto-g Extended Weibull Distribution" (2017). Theses, Dissertations and Capstones. 1106. https://mds.marshall.edu/etd/1106) will be discussed.
+
+This family consists of the Pareto (Type I) Extended Weibull Distribution or PEW for short, and the Pareto (Type II) Extended Weibull Distribution or otherwise called the Lomax Extended Weibull Distribution or LEW for short. The numbers of the parameters of PEW or LEW depend on the number of parameters for the extended Weibull distribution and type of the Pareto distribution.
+
+Some properties of Pareto II Extended Weibull distributions are the hazard rate function, the CDF, and the PDF.
+
+
+# The Hazard function of The Lomax Extended Weibull when $\alpha$ is 0 
+
+The Hazard function for LEW when $\alpha = 0$ is given as $(a*\beta*\gamma*x^{(\beta-1)})/(\lambda+(\gamma*x^\beta))$ where $\beta = b, a, \gamma = gam, \lambda = lam$ are the parameters. Here, different values for each parameters were used to get different plots.
+```{r 8}
+x=seq(0,15,0.01)
+a=2
+b=3
+gam=2
+lam=1
+
+f1=((a*b*gam*x^(b-1))/(lam+(gam*x^b)))
+
+
+######
+a=2
+b=3
+gam=.5
+lam=3
+f2=((a*b*gam*x^(b-1))/(lam+(gam*x^b)))
+
+
+##############
+a=2
+b=.5
+gam=3
+lam=2.5
+f3=((a*b*gam*x^(b-1))/(lam+(gam*x^b)))
+
+##
+par(mfrow=c(1,1), oma=c(0,0,0,0))
+ plot(x,f1,lty= 1,type="l",lwd = 2,xlab="x",ylab="HAZARD FUNCTION",xlim=c(0,15), ylim=c(0,5),col="1")
+ par(new=TRUE)
+ plot(x,f2,lty= 1,type="l",lwd = 2, xlab=" ",ylab=" ",xlim=c(0,15), ylim=c(0,5),col="2")
+ par(new=TRUE)
+ plot(x,f3,lty= 1,type="l",lwd = 2, xlab="x",ylab="",xlim=c(0,15), ylim=c(0,5),col="4")
+ 
+legend(8,5, legend=c(
+expression(alpha==2~~ beta==3~~gamma==2~~lambda==1),
+expression(alpha==2~~ beta==3~~gamma==0.5~~lambda==3),
+expression(alpha==2~~ beta==0.5~~gamma==3~~lambda==2.5)),
+cex=0.8,lty=c(1,1,1),col=c(1,2,4),lwd=2)
+
+```
+
+# The PDF of The Lomax Extended Weibull when $\alpha$ is 0
+
+The PDF of LEW when $\alpha = 0$ is given as $(a*\beta*\gamma/\lambda)*x^{(\beta-1)}*(1+\gamma*x^{(\beta)}/\lambda)^{(-a-1)}$, where different values for $a, \beta = b, \gamma = gam, \& ~~\lambda = lam$ were used to get different plots.
+
+```{r 9}
+x=seq(0,5,0.01)
+a=2
+b=2
+gam=2
+lam=1
+
+f1=(a*b*gam*x^(b-1)/lam)*(1+gam*x^(b)/lam)^(-(a+1))
+
+
+######
+a=2
+b=3
+gam=.5
+lam=5
+f2=(a*b*gam*x^(b-1)/lam)*(1+gam*x^(b)/lam)^(-(a+1))
+
+
+##############
+a=2
+b=.5
+gam=3
+lam=2.5
+f3=(a*b*gam*x^(b-1)/lam)*(1+gam*x^(b)/lam)^(-(a+1))
+
+##
+par(mfrow=c(1,1), oma=c(0,0,0,0))
+ plot(x,f1,lty= 1,type="l",lwd = 2,xlab="x",ylab="PDF",xlim=c(0,5), ylim=c(0,2),col="1")
+ par(new=TRUE)
+ plot(x,f2,lty= 1,type="l",lwd = 2, xlab=" ",ylab=" ",xlim=c(0,5), ylim=c(0,2),col="2")
+ par(new=TRUE)
+ plot(x,f3,lty= 1,type="l",lwd = 2, xlab="x",ylab="",xlim=c(0,5), ylim=c(0,2),col="4")
+ 
+legend(3,2, legend=c(
+expression(alpha==2~~ beta==2~~gamma==2~~lambda==1),
+expression(alpha==2~~ beta==3~~gamma==0.5~~lambda==5),
+expression(alpha==2~~ beta==0.5~~gamma==3~~lambda==2.5)), cex=0.8,lty=c(1,1,1),col=c(1,2,4),lwd=2)
+
+```
+
+# The CDF of The Lomax Extended Weibull when $\alpha$ is 0
+
+The CDF of LEW when $\alpha = 0$ is given as $1-(1+\gamma*x^{(\beta)}/\lambda)^{(-a)}$, where different values are used for each parameters: $a, \beta = b, \gamma = gamma, \& ~~\lambda = lambda$  and x is used as the dataset.
+```{r 10}
+x=seq(0,5,0.01)
+a=1.5
+b=2
+gam=2
+lam=3
+
+f1=1-(1+(gam*x^(b))/lam)^(-a) ##Black
+
+
+######
+a=2
+b=3
+gam=.5
+lam=5
+f2=1-(1+gam*x^(b)/lam)^(-a) ## Red
+
+
+##
+par(mfrow=c(1,1), oma=c(0,0,0,0))
+ plot(x,f1,lty= 1,type="l",lwd = 2,xlab="x",ylab="CDF",xlim=c(0,5), ylim=c(0,1),col="1")
+ par(new=TRUE)
+ plot(x,f2,lty= 1,type="l",lwd = 2, xlab=" ",ylab=" ",xlim=c(0,5), ylim=c(0,1),col="2")
+  
+legend(3,.8, legend=c(
+expression(alpha==1.5~~ beta==2~~gamma==2~~lambda==3),
+expression(alpha==2~~ beta==3~~gamma==0.5~~lambda==5)), cex=0.8,lty=c(1,1),col=c(1,2),lwd=2)
+```
+
+
+
+## Exceedances of Wheaton River flood data in $m^3/s$. 
+
+The data are the exceedances of flood peaks in ($m^3/s$) of the Wheaton River near Carcross in Yukon Territory, Canada. The data consists of 72 exceedances for the years 1958-1984, rounded to one decimal place.  This distribution is often called ’peaks over thresholds’ model since it is used to model exceedances over threshold levels in flood control.
+
+
+
+# Get the maximum likelihood estimate (mle) of the parameters of each distributions
+
+Here we will show how to get the mle using exceedance of wheaton river data by using the LEW PDF and CDF as an example.
+
+```{r 15}
+library(AdequacyModel)
+wheaton = c(1.7, 2.2, 14.4, 1.1, 0.4, 20.6, 5.3, 0.7, 1.9, 13.0, 12.0, 9.3, 1.4, 18.7, 8.5,
+25.5, 11.6, 14.1, 22.1, 1.1, 2.5, 14.4, 1.7, 37.6, 0.6, 2.2, 39.0, 0.3, 15.0, 11.0, 7.3, 22.9,
+1.7, 0.1, 1.1, 0.6, 9.0, 1.7, 7.0, 20.1, 0.4, 2.8, 14.1, 9.9, 10.4, 10.7, 30.0, 3.6, 5.6, 30.8,
+13.3, 4.2, 25.5, 3.4, 11.9, 21.5, 27.6, 36.4, 2.7, 64.0,1.5, 2.5, 27.4, 1.0, 27.1, 20.2, 16.8,
+5.3, 9.7, 27.5, 2.5, 27.0)
+
+```
+
+## LOMAX EXTENDED WEIBULL (LEW) DISTRIBUTION
+
+The PDF of LEW when $\alpha = 0$ is given as $(a*\beta*\gamma/\lambda)*x^{(\beta-1)}*(1+\gamma*x^{(\beta)}/\lambda)^{(-a-1)}$, where $a, \beta = b, \gamma = gamma, \& ~~\lambda = lambda$ are the parameters.
+
+```{r 16}
+
+# LOMAX EXTENDED WEIBULL  - Probability density function.
+pdf_lew <- function(par,x){
+a = par[1]
+b = par[2]
+gamma = par[3]
+lambda = par[4]
+(a*b*gamma/lambda)*x^(b-1)*(1+gamma*x^(b)/lambda)^(-a-1)
+}
+```
+
+
+# LOMAX EXTENDED WEIBULL (LEW)- Cumulative distribution function.
+
+Using the Exceedances of Wheaton River flood data, we will obtain the MLE for each of the parameters for LEW. 
+
+The CDF of LEW when $\alpha = 0$ is given as $1-(1+\gamma*x^{(\beta)}/\lambda)^{(-a)}$, where $a, \beta = b, \gamma = gamma, \& ~~\lambda = lambda$ are the parameters
+
+lew_1 is the result of the estimate obtained
+```{r 17}
+cdf_lew <- function(par,x){
+a = par[1]
+b = par[2]
+gamma = par[3]
+lambda = par[4]
+
+1-(1+gamma*x^(b)/lambda)^(-a)
+}
+
+set.seed(0)
+
+lew_1 = goodness.fit(pdf = pdf_lew, cdf = cdf_lew,
+starts = c(1,1,1,1), data = wheaton, method = "PSO",
+domain = c(0,Inf),mle = NULL, lim_inf = c(0,0,0,0),
+lim_sup = c(5,5,5,5), S = 250, prop=0.1, N=500)
+lew_1
+x = seq(0, 70, length.out = 500)
+hist(wheaton, probability = TRUE,ylim=c(0,.1))
+lines(x, pdf_lew(x, par = lew_1$mle), col = "red")
+
+```
+
+
+
+
+##### Plot of all cumulative distributions with the empirical dataset (Exceedance of Wheaton river data)
+
+
+Kumaraswamy Transmuted Pareto cumulative distribution and its parameter estimates.
+
+The Kumaraswamy Transmuted Pareto PDF is given as $1-(1-(1-(\theta/x)^\alpha)^a*(1+\lambda*(theta/x)^\alpha)^a)^{(b)}$
+
+
+```{r }
+
+wheaton=c(1.7, 2.2, 14.4, 1.1, 0.4, 20.6, 5.3, 0.7, 1.9, 13.0, 12.0, 9.3, 1.4, 18.7, 8.5,
+25.5, 11.6, 14.1, 22.1, 1.1, 2.5, 14.4, 1.7, 37.6, 0.6, 2.2, 39.0, 0.3, 15.0, 11.0, 7.3, 22.9,
+1.7, 0.1, 1.1, 0.6, 9.0, 1.7, 7.0, 20.1, 0.4, 2.8, 14.1, 9.9, 10.4, 10.7, 30.0, 3.6, 5.6, 30.8,
+13.3, 4.2, 25.5, 3.4, 11.9, 21.5, 27.6, 36.4, 2.7, 64.0,1.5, 2.5, 27.4, 1.0, 27.1, 20.2, 16.8,
+5.3, 9.7, 27.5, 2.5, 27.0)
+
+x=sort(wheaton)
+```
+
+```{r 23}
+################### KwTP distribution ###################
+a=4.2684
+b=17.0139 
+lambda=-0.3687 
+alpha=0.2003 
+theta=0.1
+F = 1-(1-(1-(theta/x)^alpha)^a*(1+lambda*(theta/x)^alpha)^a)^(b)
+
+```
+
+# The beta transmuted Pareto (BTP) CDF and its parameter estimates
+
+The BTP CDF is given as $pbeta((1-(x0/x)^\alpha)*(1+\lambda*(x0/x)^\alpha),a,b)$
+
+```{r 24}
+##################################### BTP distribution
+a=3.9118 
+b=17.3874
+lambda= -0.8518
+alpha= 0.1159
+x0= 0.1
+F1 = pbeta((1-(x0/x)^alpha)*(1+lambda*(x0/x)^alpha),a,b)
+
+```
+
+## The beta Pareto (BP) cumulative distribution and its parameter estimates
+
+The BP CDF is given as $pbeta((1-(x0/x)^\alpha),a,b)$
+```{r 25}
+##################################### BP distribution
+a=3.1473 
+b=85.7508
+alpha=0.0088 
+x0=0.1
+
+F2=pbeta((1-(x0/x)^alpha),a,b)
+
+```
+
+##  The Transmuted Pareto (TP) cumulative distribution and its parameter estimates
+
+The TP CDF is given as $(1-(x0/x)^\alpha)*(1+\lambda*(x0/x)^\alpha)$
+```{r 26}
+##################################### TP distribution
+lambda=-0.952
+alpha=0.349
+x0=0.1
+
+F3=(1-(x0/x)^alpha)*(1+lambda*(x0/x)^alpha)
+
+```
+
+## The Exponentiated Pareto (EP) cumulative distribution and its parameter estimates
+
+The EP CDF is given as $pbeta((1-(x0/x)^\alpha)*(1+\lambda*(x0/x)^\alpha),a,b)$
+```{r 27}
+################################# EP
+a=2.8797 
+b=1
+alpha= 0.4241 
+x0=0.1
+lambda=0
+F4= pbeta((1-(x0/x)^alpha)*(1+lambda*(x0/x)^alpha),a,b)
+
+```
+
+## The Pareto cumulative distribution and its parameter estimates
+
+Here is the CDF of the Pareto distribution: $1-(x0/x)^\alpha$
+```{r 28}
+################################# P
+alpha=0.2438 
+x0=0.1
+F5= 1-(x0/x)^alpha
+
+```
+
+## The Lomax Extended Weibull (LEW) cumulative distribution and its parameter estimates
+
+$1-(1+\gamma*x^{(b)}/\lambda)^{-a}$ is the CDF of LEW
+
+```{r 29}
+################################# LEW
+a=2.7661
+b=1.0761
+gamma=0.0876
+lambda= 2.2907
+F7=1-(1+gamma*x^(b)/lambda)^(-a)
+
+```
+
+
+## Cumulative Plots
+
+
+```{r 30}
+
+xrange=c(0,max(x))
+yrange=c(0,1)
+x<-sort(x)
+E<-ecdf(x)
+E
+ecdf<-E(c(x))
+ par(mfrow=c(1,1),oma=c(0,0,0,0))
+ plot(x,ecdf,lty=1,lwd=2,type="s",xlab="Flood Peaks Exceedance",ylab="F(x)",ylim=yrange,xlim=c(min(x),max(x)), col=1)
+par(new=TRUE)
+lines(x,F, xlim=xrange, lty=1, ylim=yrange, ylab="Density", lwd=2,col="purple", xlab="")
+par(new=TRUE)
+lines(x,F1, xlim=xrange, lty=1, ylim=yrange, ylab="Density", lwd=2,col=7, xlab="")
+par(new=TRUE)
+lines(x,F2, xlim=xrange, lty=1, ylim=yrange, ylab="Density", lwd=2,col=3, xlab="")
+par(new=TRUE)
+lines(x,F3, xlim=xrange, lty=1, ylim=yrange, ylab="Density", lwd=2,col=4, xlab="")
+par(new=TRUE)
+lines(x,F4, xlim=xrange, lty=1, ylim=yrange, ylab="Density", lwd=2,col=5, xlab="")
+par(new=TRUE)
+lines(x,F5, xlim=xrange, lty=1, ylim=yrange, ylab="Density", lwd=2,col=6, xlab="")
+par(new=TRUE)
+lines(x,F7, xlim=xrange, lty=1, ylim=yrange, ylab="Density", lwd=2,col=2, xlab="")
+par(new=T)
+abline(h=1, lty=2)
+abline(h=0, lty=2)
+
+legend(30,0.55, legend=c(expression("Empirical-Distribution"),expression("KwTP Distribution"),expression("BTP Distribution"),expression("BP Distribution"),
+expression("TP Distribution"),expression("EP Distribution"),expression("P Distribution"),expression("LEW Distribution") ),lwd=2,lty=c(1,1,1), col=c(1,"purple",7,3,4,5,6,2))
+
+box()
+
+```
+
+
+
+
+ The method of maximum likelihood estimation was used to estimate the parameters of the distributions. Result shows that our new distribution (LEW) performs better than the other distributions.
+ 
+
+
